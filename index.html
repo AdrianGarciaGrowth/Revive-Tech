@@ -423,6 +423,225 @@ footer{
 /* ── SCROLL REVEAL ── */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+.reveal-scale{opacity:0;transform:scale(0.88);transition:opacity .7s ease,transform .7s ease;}
+.reveal-scale.visible{opacity:1;transform:scale(1);}
+
+/* ── PARTICLES ── */
+#particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.particle{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:var(--verde);opacity:0;
+  animation:floatParticle linear infinite;
+}
+@keyframes floatParticle{
+  0%{transform:translateY(100vh) scale(0);opacity:0;}
+  10%{opacity:.6;}
+  90%{opacity:.2;}
+  100%{transform:translateY(-10vh) scale(1.5);opacity:0;}
+}
+
+/* ── HERO MEJORADO ── */
+.hero-tag{animation:fadeUp .8s ease both,glowPulse 3s 1s ease-in-out infinite;}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 rgba(0,174,106,0);}50%{box-shadow:0 0 20px rgba(0,174,106,0.3);}}
+.hero-counter{
+  font-family:'Montserrat',sans-serif;
+  font-size:2.2rem;font-weight:900;color:var(--verde);line-height:1;
+  display:inline-block;
+}
+.typewriter{overflow:hidden;white-space:nowrap;border-right:3px solid var(--verde);}
+
+/* ── GALERÍA ── */
+#galeria{
+  background:var(--negro);
+  padding:6rem 0;
+  overflow:hidden;
+}
+#galeria .galeria-inner{padding:0 5%;}
+.galeria-tabs{
+  display:flex;gap:0;margin-top:2.5rem;margin-bottom:3rem;
+  border-bottom:1px solid var(--gris-borde);
+  overflow-x:auto;
+}
+.gtab{
+  padding:.8rem 1.8rem;
+  font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--texto-muted);
+  background:none;border:none;cursor:pointer;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all .25s;white-space:nowrap;
+}
+.gtab:hover{color:var(--blanco);}
+.gtab.active{color:var(--verde);border-bottom-color:var(--verde);}
+
+/* Masonry-style grid */
+.galeria-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto;
+  gap:8px;
+}
+.gitem{
+  position:relative;overflow:hidden;
+  background:var(--gris-medio);
+  cursor:pointer;
+}
+.gitem:nth-child(1){grid-column:span 2;grid-row:span 2;min-height:420px;}
+.gitem:nth-child(5){grid-column:span 2;min-height:220px;}
+.gitem:nth-child(8){grid-column:span 2;min-height:220px;}
+.gitem{min-height:210px;}
+.gitem-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.gitem:hover .gitem-bg{transform:scale(1.08);}
+.gitem-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 50%, transparent 100%);
+  opacity:0;transition:opacity .4s;
+  display:flex;align-items:flex-end;padding:1.5rem;
+}
+.gitem:hover .gitem-overlay{opacity:1;}
+.gitem-info{}
+.gitem-cat{
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--verde);font-weight:600;margin-bottom:.3rem;
+}
+.gitem-title{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;line-height:1.2;}
+
+/* Marquee band */
+.marquee-band{
+  margin-top:3.5rem;
+  display:flex;overflow:hidden;
+  border-top:1px solid var(--gris-borde);
+  border-bottom:1px solid var(--gris-borde);
+  padding:1rem 0;
+}
+.marquee-track{
+  display:flex;gap:3rem;align-items:center;
+  animation:marqueeScroll 22s linear infinite;
+  white-space:nowrap;
+}
+.marquee-track:nth-child(2){animation-delay:-11s;}
+@keyframes marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marquee-item{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--texto-muted);
+}
+.marquee-item span{color:var(--verde);font-size:1rem;}
+
+/* Lightbox */
+#lightbox{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.96);
+  align-items:center;justify-content:center;
+}
+#lightbox.open{display:flex;}
+#lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px;}
+#lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:1.4rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+#lightbox-close:hover{background:rgba(0,174,106,.3);border-color:var(--verde);}
+#lightbox-caption{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-size:.85rem;color:rgba(255,255,255,.7);letter-spacing:.06em;text-align:center;
+}
+
+/* Slider de clientes / testimonios */
+#impacto{background:var(--gris-oscuro);padding:6rem 5%;overflow:hidden;}
+.impacto-numeros{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  background:var(--gris-borde);
+  margin-bottom:5rem;
+}
+.impacto-num-card{
+  background:var(--gris-oscuro);
+  padding:2.5rem 2rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.impacto-num-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--verde),transparent);
+  transform:scaleX(0);transition:transform .5s;
+}
+.impacto-num-card:hover::before{transform:scaleX(1);}
+.impacto-big{
+  font-family:'Montserrat',sans-serif;
+  font-size:3.5rem;font-weight:900;color:var(--verde);line-height:1;margin-bottom:.4rem;
+}
+.impacto-label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-muted);}
+
+/* Horizontal scroll strip */
+.hscroll-strip{
+  display:flex;gap:1.5rem;
+  overflow-x:auto;padding-bottom:1rem;
+  scrollbar-width:thin;scrollbar-color:var(--verde) var(--gris-borde);
+}
+.hscroll-strip::-webkit-scrollbar{height:4px;}
+.hscroll-strip::-webkit-scrollbar-track{background:var(--gris-borde);}
+.hscroll-strip::-webkit-scrollbar-thumb{background:var(--verde);border-radius:2px;}
+.hcard{
+  flex:0 0 280px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--gris-borde);
+  border-radius:4px;padding:2rem;
+  position:relative;transition:all .3s;
+}
+.hcard:hover{border-color:rgba(0,174,106,.4);transform:translateY(-4px);}
+.hcard-quote{font-size:2.5rem;color:var(--verde);opacity:.4;line-height:.8;margin-bottom:.8rem;}
+.hcard-text{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:1.2rem;}
+.hcard-author{font-size:.75rem;font-weight:600;color:var(--blanco);letter-spacing:.04em;}
+.hcard-role{font-size:.7rem;color:var(--texto-muted);}
+
+/* Animación de entrada para servicio cards con delay */
+.servicio-card{transition:all .35s,opacity .6s,transform .6s;}
+.servicio-card.hidden-card{opacity:0;transform:translateY(20px);}
+
+/* Hover glow en botones */
+.btn-primary{position:relative;overflow:hidden;}
+.btn-primary::after{
+  content:'';position:absolute;inset:-2px;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .4s;
+}
+.btn-primary:hover::after{transform:translateX(100%);}
+
+/* Línea animada decorativa */
+.deco-line{
+  width:60px;height:3px;background:var(--verde);border-radius:2px;
+  margin:1.5rem 0;position:relative;overflow:hidden;
+}
+.deco-line::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:shimmer 2s ease-in-out infinite;
+}
+@keyframes shimmer{from{transform:translateX(-100%);}to{transform:translateX(100%);}}
+
+/* ── CURSOR PERSONALIZADO ── */
+.cursor-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--verde);position:fixed;z-index:99999;
+  pointer-events:none;transform:translate(-50%,-50%);
+  transition:opacity .2s;mix-blend-mode:difference;
+}
+.cursor-ring{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid rgba(0,174,106,.6);
+  position:fixed;z-index:99998;pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,border-color .2s;
+}
+.cursor-ring.hovered{width:60px;height:60px;border-color:var(--verde);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
@@ -460,6 +679,7 @@ footer{
     <li><a href="#modelo">Proceso</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#valores">Valores</a></li>
+    <li><a href="#galeria">Galería</a></li>
     <li><a href="#normativa">Normativa</a></li>
     <li><a href="#cta" class="nav-cta">Contáctenos</a></li>
   </ul>
@@ -473,6 +693,8 @@ footer{
   <a href="#modelo" onclick="toggleMenu()">Proceso</a>
   <a href="#servicios" onclick="toggleMenu()">Servicios</a>
   <a href="#valores" onclick="toggleMenu()">Valores</a>
+  <a href="#galeria" onclick="toggleMenu()">Galería</a>
+  <a href="#impacto" onclick="toggleMenu()">Impacto</a>
   <a href="#normativa" onclick="toggleMenu()">Normativa</a>
   <a href="#cta" onclick="toggleMenu()">Contáctenos</a>
 </div>
@@ -780,6 +1002,128 @@ footer{
   </div>
 </section>
 
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="galeria-inner">
+    <div class="reveal">
+      <div class="section-label">Nuestro trabajo</div>
+      <h2 class="section-title">En acción por el planeta</h2>
+      <p class="section-desc">Imágenes de nuestras operaciones: recolección, tratamiento, aprovechamiento y disposición final de residuos RAEE y RESPEL.</p>
+    </div>
+    <div class="galeria-tabs">
+      <button class="gtab active" onclick="filterGaleria('all',this)">Todos</button>
+      <button class="gtab" onclick="filterGaleria('raee',this)">RAEE</button>
+      <button class="gtab" onclick="filterGaleria('proceso',this)">Proceso</button>
+      <button class="gtab" onclick="filterGaleria('equipo',this)">Equipo</button>
+      <button class="gtab" onclick="filterGaleria('impacto',this)">Impacto</button>
+    </div>
+    <div class="galeria-grid" id="galeriaGrid">
+      <div class="gitem reveal-scale" data-cat="raee" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">RAEE</div><div class="gitem-title">Gestión de residuos electrónicos</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="proceso" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Proceso</div><div class="gitem-title">Clasificación y tratamiento</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="equipo" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Equipo</div><div class="gitem-title">Profesionales certificados</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="impacto" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Impacto</div><div class="gitem-title">Naturaleza recuperada</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="proceso" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Proceso</div><div class="gitem-title">Laboratorio y análisis técnico</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="raee" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">RAEE</div><div class="gitem-title">Desensamble responsable</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="equipo" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Equipo</div><div class="gitem-title">Capacitación ambiental</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="impacto" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1497435334941-8c899a9a0826?w=900&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Impacto</div><div class="gitem-title">Economía circular en Colombia</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="raee" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">RAEE</div><div class="gitem-title">Desmonte de planta industrial</div></div></div>
+      </div>
+      <div class="gitem reveal-scale" data-cat="proceso" onclick="openLightbox(this)">
+        <div class="gitem-bg" style="background-image:url('https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=700&q=80');"></div>
+        <div class="gitem-overlay"><div class="gitem-info"><div class="gitem-cat">Proceso</div><div class="gitem-title">Transporte certificado</div></div></div>
+      </div>
+    </div>
+    <div class="marquee-band">
+      <div class="marquee-track">
+        <div class="marquee-item"><span>♻</span> Economía Circular</div>
+        <div class="marquee-item"><span>⚡</span> RAEE Colombia</div>
+        <div class="marquee-item"><span>🌿</span> Sostenibilidad</div>
+        <div class="marquee-item"><span>🔒</span> Trazabilidad Total</div>
+        <div class="marquee-item"><span>📜</span> Certificados Ambientales</div>
+        <div class="marquee-item"><span>🚛</span> Recolección Incluida</div>
+        <div class="marquee-item"><span>♻</span> Economía Circular</div>
+        <div class="marquee-item"><span>⚡</span> RAEE Colombia</div>
+        <div class="marquee-item"><span>🌿</span> Sostenibilidad</div>
+        <div class="marquee-item"><span>🔒</span> Trazabilidad Total</div>
+        <div class="marquee-item"><span>📜</span> Certificados Ambientales</div>
+        <div class="marquee-item"><span>🚛</span> Recolección Incluida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button id="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+<!-- IMPACTO -->
+<section id="impacto">
+  <div class="reveal">
+    <div class="section-label">Nuestro impacto</div>
+    <h2 class="section-title">Números que hablan por sí solos</h2>
+  </div>
+  <div class="impacto-numeros reveal">
+    <div class="impacto-num-card">
+      <div class="impacto-big" data-target="100">0</div>
+      <div class="impacto-label">% Trazabilidad garantizada</div>
+    </div>
+    <div class="impacto-num-card">
+      <div class="impacto-big" data-target="3">0</div>
+      <div class="impacto-label">Leyes ambientales cubiertas</div>
+    </div>
+    <div class="impacto-num-card">
+      <div class="impacto-big" data-target="12">0</div>
+      <div class="impacto-label">Servicios especializados</div>
+    </div>
+    <div class="impacto-num-card">
+      <div class="impacto-big" data-target="5">0</div>
+      <div class="impacto-label">Etapas de gestión integral</div>
+    </div>
+  </div>
+  <div class="reveal" style="margin-bottom:2rem;">
+    <div class="section-label">Lo que dicen nuestros clientes</div>
+    <div class="deco-line"></div>
+  </div>
+  <div class="hscroll-strip reveal">
+    <div class="hcard"><div class="hcard-quote">"</div><p class="hcard-text">Revive Tech nos ayudó a cumplir con la normativa RAEE de manera fácil y confiable. El proceso fue transparente de inicio a fin.</p><div class="hcard-author">Empresa Industrial · Pereira</div><div class="hcard-role">Gerente de Operaciones</div></div>
+    <div class="hcard"><div class="hcard-quote">"</div><p class="hcard-text">El servicio de molienda de archivos nos garantizó la protección de datos de nuestros clientes. 100% recomendados.</p><div class="hcard-author">Empresa de Servicios · Manizales</div><div class="hcard-role">Directora de Cumplimiento</div></div>
+    <div class="hcard"><div class="hcard-quote">"</div><p class="hcard-text">Gestionaron el desmonte completo de nuestra planta con rapidez y cero incidentes ambientales. Excelente equipo profesional.</p><div class="hcard-author">Planta Manufacturera · Risaralda</div><div class="hcard-role">Jefe de Planta</div></div>
+    <div class="hcard"><div class="hcard-quote">"</div><p class="hcard-text">Gracias a las capacitaciones ambientales, nuestro personal ahora tiene plena conciencia del manejo correcto de residuos.</p><div class="hcard-author">Institución Educativa · Dosquebradas</div><div class="hcard-role">Coordinadora Ambiental</div></div>
+    <div class="hcard"><div class="hcard-quote">"</div><p class="hcard-text">El certificado de disposición final nos permitió cumplir con la auditoría ambiental sin ningún inconveniente. Profesionales de alto nivel.</p><div class="hcard-author">Empresa Tecnológica · Armenia</div><div class="hcard-role">Responsable HSE</div></div>
+    <div class="hcard"><div class="hcard-quote">"</div><p class="hcard-text">Recolectan, transportan y certifican todo. Solo llamamos y ellos se encargan. El mejor servicio del Eje Cafetero.</p><div class="hcard-author">Distribuidora Electrónica · Cali</div><div class="hcard-role">Gerente General</div></div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta">
   <div class="cta-content reveal">
@@ -864,67 +1208,164 @@ footer{
   </div>
 </footer>
 
+<!-- CURSOR -->
+<div class="cursor-dot" id="curDot"></div>
+<div class="cursor-ring" id="curRing"></div>
+
 <script>
-// NAV scroll
+// ── CURSOR
+const dot = document.getElementById('curDot');
+const ring = document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button,.gitem,.servicio-card,.valor-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));
+});
+
+// ── NAV scroll
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
 });
 
-// Mobile menu
-function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
+// ── Mobile menu
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
 
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
+// ── Scroll reveal (múltiples clases)
+const allReveal = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const revObs = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
     if(e.isIntersecting){
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
+      setTimeout(()=>e.target.classList.add('visible'), (e.target.dataset.delay||0)*80);
+      revObs.unobserve(e.target);
     }
   });
-},{threshold:0.1});
-reveals.forEach(r=>observer.observe(r));
+},{threshold:0.08});
+allReveal.forEach((r,i)=>{r.dataset.delay=i%6; revObs.observe(r);});
 
-// Smooth active nav link highlight
+// ── Nav highlight
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{
   let current='';
-  sections.forEach(s=>{
-    if(window.scrollY>=s.offsetTop-120) current=s.getAttribute('id');
-  });
-  navLinks.forEach(a=>{
-    a.style.color = a.getAttribute('href')==='#'+current ? 'var(--verde)' : '';
-  });
-});
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120) current=s.getAttribute('id');});
+  navLinks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+current?'var(--verde)':'';});
+},{passive:true});
 
-// Animated counters
-function animateCounter(el,target,suffix=''){
+// ── Animated counters (impacto section)
+function animCounter(el,target,suffix=''){
   let start=0;
-  const duration=1800;
-  const step = timestamp => {
-    if(!start) start=timestamp;
-    const progress=Math.min((timestamp-start)/duration,1);
-    const val = Math.floor(progress*target);
-    el.textContent = val+suffix;
-    if(progress<1) requestAnimationFrame(step);
-    else el.textContent = target+suffix;
+  const dur=2000;
+  const ease=t=>t<.5?2*t*t:(4-2*t)*t-1;
+  const step=ts=>{
+    if(!start)start=ts;
+    const p=Math.min((ts-start)/dur,1);
+    el.textContent=Math.round(ease(p)*target)+suffix;
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent=target+suffix;
   };
   requestAnimationFrame(step);
 }
-const statsObserver = new IntersectionObserver((entries)=>{
+const impactObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
-      const nums = e.target.querySelectorAll('.stat-num');
-      nums[0] && animateCounter(nums[0],100,'%');
-      statsObserver.unobserve(e.target);
+      e.target.querySelectorAll('.impacto-big[data-target]').forEach(el=>{
+        animCounter(el,+el.dataset.target);
+      });
+      impactObs.unobserve(e.target);
     }
   });
+},{threshold:.4});
+const impEl=document.getElementById('impacto');
+if(impEl)impactObs.observe(impEl);
+
+// ── Stat counters hero
+function animateCounter(el,target,suffix=''){
+  let start=0;const dur=1800;
+  const step=ts=>{if(!start)start=ts;const p=Math.min((ts-start)/dur,1);el.textContent=Math.floor(p*target)+suffix;if(p<1)requestAnimationFrame(step);else el.textContent=target+suffix;};
+  requestAnimationFrame(step);
+}
+const statsObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){const nums=e.target.querySelectorAll('.stat-num');nums[0]&&animateCounter(nums[0],100,'%');statsObs.unobserve(e.target);}
+  });
 },{threshold:.5});
-const heroEl = document.getElementById('hero');
-if(heroEl) statsObserver.observe(heroEl);
+const heroEl=document.getElementById('hero');
+if(heroEl)statsObs.observe(heroEl);
+
+// ── GALERÍA FILTRO
+function filterGaleria(cat,btn){
+  document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const items=document.querySelectorAll('#galeriaGrid .gitem');
+  items.forEach((item,i)=>{
+    const show=cat==='all'||item.dataset.cat===cat;
+    item.style.transition='opacity .4s '+i*0.04+'s, transform .4s '+i*0.04+'s';
+    if(show){item.style.opacity='1';item.style.transform='scale(1)';item.style.pointerEvents='auto';}
+    else{item.style.opacity='0';item.style.transform='scale(0.92)';item.style.pointerEvents='none';}
+  });
+}
+
+// ── LIGHTBOX
+function openLightbox(el){
+  const bg=el.querySelector('.gitem-bg');
+  const url=bg.style.backgroundImage.replace(/url\(['"]?/,'').replace(/['"]?\)/,'');
+  const title=el.querySelector('.gitem-title')?.textContent||'';
+  const cat=el.querySelector('.gitem-cat')?.textContent||'';
+  document.getElementById('lightbox-img').src=url;
+  document.getElementById('lightbox-caption').textContent=cat+' — '+title;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+  if(!e||e.target===document.getElementById('lightbox')||e.target===document.getElementById('lightbox-close')){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox({target:document.getElementById('lightbox')});});
+
+// ── PARTÍCULAS HERO
+(function(){
+  const hero=document.getElementById('hero');
+  const pContainer=document.createElement('div');
+  pContainer.id='particles';pContainer.style.cssText='position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;';
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;width:${2+Math.random()*3}px;height:${2+Math.random()*3}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s;opacity:${0.3+Math.random()*0.5};`;
+    pContainer.appendChild(p);
+  }
+  hero.appendChild(pContainer);
+})();
+
+// ── TYPEWRITER en hero
+(function(){
+  const words=['segunda vida','nuevo futuro','impacto positivo','economía circular'];
+  let wi=0,ci=0,del=false;
+  const el=document.querySelector('h1 .accent');
+  if(!el)return;
+  function type(){
+    const w=words[wi];
+    if(!del){
+      el.textContent=w.slice(0,++ci);
+      if(ci===w.length){del=true;setTimeout(type,1800);return;}
+    } else {
+      el.textContent=w.slice(0,--ci);
+      if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(type,400);return;}
+    }
+    setTimeout(type,del?55:90);
+  }
+  setTimeout(type,2000);
+  el.style.borderRight='3px solid var(--verde)';
+  el.style.paddingRight='4px';
+  el.style.animation='blink .8s step-end infinite';
+  const style=document.createElement('style');
+  style.textContent='@keyframes blink{0%,100%{border-color:var(--verde);}50%{border-color:transparent;}}';
+  document.head.appendChild(style);
+})();
 </script>
 </body>
 </html>
